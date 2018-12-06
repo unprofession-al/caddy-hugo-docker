@@ -13,9 +13,6 @@ RUN tar -xzvf hugo.tgz hugo
 
 # App image
 FROM alpine:3.8
-
-ENV ACME_AGREE="false"
-
 RUN apk add --no-cache openssh-client git ca-certificates
 
 COPY --from=downloader /downloads/caddy /caddy
@@ -29,4 +26,4 @@ VOLUME /root/.caddy /srv
 WORKDIR /srv
 
 ENTRYPOINT ["/caddy"]
-CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
+CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=true"]
